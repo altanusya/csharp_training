@@ -22,7 +22,12 @@ namespace WebAddressdookTests
             AddNewContact();
             FillContactForm(new ContactData("John", "Doe"));
             SubmitContactCreation();
-            AddNewContact();
+            GoToHomePage();
+        }
+
+        private void GoToHomePage()
+        {
+            driver.FindElement(By.LinkText("home")).Click();
         }
 
         public void SubmitContactCreation()
