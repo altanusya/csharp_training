@@ -10,21 +10,18 @@ using OpenQA.Selenium.Support.UI;
 namespace WebAddressdookTests
 {
     [TestFixture]
-    public class GroupCreationTests : TestBase
-    {      
+    public class GroupRemovalTests : TestBase
+    {
+        
         [Test]
-        public void GroupCreationTest()
+        public void GroupRemovalTest()
         {
             GoToHomePage();
             Login(new AccountData("admin", "secret"));
             GoToGroupPage();
-            InitGroupCreation();
-            GroupData group = new GroupData("AAA");
-            group.Footer = "fff";
-            group.Header = "ddd";
-            FillGroupForm(group);
-            SubmitGroupCreation();
+            SelectGroup(1);
+            RemoveGroup();
             ReturToGroupPage();
-        }        
+        }
     }
 }
