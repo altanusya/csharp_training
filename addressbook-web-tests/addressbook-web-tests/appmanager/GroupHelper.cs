@@ -27,11 +27,23 @@ namespace WebAddressdookTests
             return this;
         }
 
+        public GroupHelper Modify(int index, GroupData newData)
+        {
+            manager.Navigator.GoToGroupPage();
+            SelectGroup(index);
+            InitGroupMidification();
+            FillGroupForm(newData);
+            SubmitGroupModification();
+            ReturToGroupPage();
+
+            return this;
+        }
+
         public GroupHelper Remove(int index)
         {
             manager.Navigator.GoToGroupPage();
 
-            SelectGroup(1);
+            SelectGroup(index);
             RemoveGroup();
             ReturToGroupPage();
             return this;
@@ -75,6 +87,18 @@ namespace WebAddressdookTests
         public GroupHelper ReturToGroupPage()
         {
             driver.FindElement(By.LinkText("group page")).Click();
+            return this;
+        }
+
+        public GroupHelper SubmitGroupModification()
+        {
+            driver.FindElement(By.Name("update")).Click();
+            return this;
+        }
+
+        public GroupHelper InitGroupMidification()
+        {
+            driver.FindElement(By.Name("edit")).Click();
             return this;
         }
 
