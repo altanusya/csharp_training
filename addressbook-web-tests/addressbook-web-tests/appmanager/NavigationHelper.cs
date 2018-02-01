@@ -25,7 +25,7 @@ namespace WebAddressdookTests
       
         public void GoToHomePage()
         {
-            driver.Navigate().GoToUrl(baseURL + "addressbook/group.php");
+            driver.Navigate().GoToUrl(baseURL + "addressbook/");
         }
 
        

@@ -16,12 +16,17 @@ namespace WebAddressdookTests
        [Test]
         public void ContactCreationTest()
         {
-            app.Navigator.GoToHomePage();
-            app.Auth.Login(new AccountData("admin", "secret"));
-            app.Contacts.AddNewContact();
-            app.Contacts.FillContactForm(new ContactData("John", "Doe"));
-            app.Contacts.SubmitContactCreation();
-            app.Navigator.GoToHomePage();
+            ContactData data = new ContactData("John", "Doe");            
+
+            app.Contacts.Create(data);
+        }
+
+        [Test]
+        public void EmptyContactCreationTest()
+        {
+            ContactData data = new ContactData("", "");
+
+            app.Contacts.Create(data);
         }
     }
 }
