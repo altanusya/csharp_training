@@ -15,16 +15,21 @@ namespace WebAddressdookTests
         [Test]
         public void GroupCreationTest()
         {
-            app.Navigator.GoToHomePage();
-            app.Auth.Login(new AccountData("admin", "secret"));
-            app.Navigator.GoToGroupPage();
-            app.Groups.InitGroupCreation();
             GroupData group = new GroupData("AAA");
             group.Footer = "fff";
             group.Header = "ddd";
-            app.Groups.FillGroupForm(group);
-            app.Groups.SubmitGroupCreation();
-            app.Groups.ReturToGroupPage();
-        }        
+                       
+            app.Groups.Create(group);
+        }
+
+        [Test]
+        public void EmptyGroupCreationTest()
+        {
+            GroupData group = new GroupData("");
+            group.Footer = "";
+            group.Header = "";
+          
+            app.Groups.Create(group);
+        }
     }
 }
