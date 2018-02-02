@@ -16,38 +16,10 @@ namespace WebAddressdookTests
         {
         }
 
-        internal ContactHelper Remove(int v)
-        {
-            manager.Navigator.GoToHomePage();
-            SelectContact(v);
-            DeleteContact();
-            ApproveDeleting();
-            manager.Navigator.GoToHomePage();
-
-            return this;
-        }
-
-        private ContactHelper ApproveDeleting()
-        {
-            driver.SwitchTo().Alert().Accept();
-            return this;
-        }
-
-        private ContactHelper DeleteContact()
-        {
-            driver.FindElement(By.XPath("html/body/div[1]/div[4]/form[2]/div[2]/input")).Click();
-            return this;
-        }
-
-        private ContactHelper SelectContact(int index)
-        {
-            index++;
-            driver.FindElement(By.XPath("//*[@id='maintable']/tbody/tr["+index+"]/td[1]")).Click();
-            return this;
-        }
-
         public ContactHelper Create(ContactData account)
         {
+            manager.Navigator.GoToHomePage();
+
             AddNewContact();
             FillContactForm(account);
             SubmitContactCreation();
@@ -56,13 +28,19 @@ namespace WebAddressdookTests
             return this;
         }
 
-        public ContactHelper SubmitContactCreation()
+        public ContactHelper Remove(int v)
         {
-            driver.FindElement(By.Name("submit")).Click();
+            manager.Navigator.GoToHomePage();
+
+            SelectContact(v);
+            DeleteContact();
+            ApproveDeleting();
+            manager.Navigator.GoToHomePage();
+
             return this;
         }
 
-        internal ContactHelper Modify(int v, ContactData data)
+        public ContactHelper Modify(int v, ContactData data)
         {
             manager.Navigator.GoToHomePage();
             InitContactModification(v);
@@ -73,15 +51,41 @@ namespace WebAddressdookTests
             return this;
         }
 
-        private ContactHelper SubmitContactModification()
+        public ContactHelper ApproveDeleting()
+        {
+            driver.SwitchTo().Alert().Accept();
+            return this;
+        }
+
+        public ContactHelper DeleteContact()
+        {
+            driver.FindElement(By.XPath("html/body/div[1]/div[4]/form[2]/div[2]/input")).Click();
+            return this;
+        }
+
+        public ContactHelper SelectContact(int index)
+        {
+            index++;
+            driver.FindElement(By.XPath("//*[@id='maintable']/tbody/tr["+index+"]/td[1]")).Click();
+            return this;
+        }
+        
+
+        public ContactHelper SubmitContactCreation()
+        {
+            driver.FindElement(By.Name("submit")).Click();
+            return this;
+        }
+        
+
+        public ContactHelper SubmitContactModification()
         {
             driver.FindElement(By.Name("update")).Click();
             return this;
         }
 
-        private ContactHelper InitContactModification(int index)
+        public ContactHelper InitContactModification(int index)
         {
-            //index++;
             driver.FindElement(By.XPath("(//img[@alt='Edit'])["+index+"]")).Click();
             return this;
         }

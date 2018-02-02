@@ -13,7 +13,7 @@ namespace WebAddressdookTests.tests
         [Test]
         public void ContactModificationTest()
         {
-            ContactData data = new ContactData("John", "Smith");
+            ContactData data = new ContactData("Anna", "Smith");
 
             app.Contacts.Modify(1, data);
         }
