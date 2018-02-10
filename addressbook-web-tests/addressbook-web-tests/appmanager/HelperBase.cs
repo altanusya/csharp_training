@@ -18,5 +18,15 @@ namespace WebAddressdookTests
             this.manager = manager;
             driver = manager.Driver;
         }
+
+        public void Type(By locator, string value)
+        {
+            if (value != null)
+            {
+                driver.FindElement(locator).Clear();
+                driver.FindElement(locator).SendKeys(value);
+            }
+        }
+
     }
 }

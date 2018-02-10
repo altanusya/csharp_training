@@ -92,13 +92,12 @@ namespace WebAddressdookTests
 
         public ContactHelper FillContactForm(ContactData contact)
         {
-            driver.FindElement(By.Name("firstname")).Clear();
-            driver.FindElement(By.Name("firstname")).SendKeys(contact.Name);
-            driver.FindElement(By.Name("middlename")).Clear();
-            driver.FindElement(By.Name("middlename")).SendKeys(contact.Middlename);
+            Type(By.Name("firstname"), contact.Name);
+            Type(By.Name("middlename"), contact.Middlename);
             return this;
         }
 
+        
         public ContactHelper AddNewContact()
         {
             driver.FindElement(By.LinkText("add new")).Click();
