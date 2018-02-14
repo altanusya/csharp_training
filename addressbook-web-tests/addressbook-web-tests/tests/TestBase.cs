@@ -13,11 +13,9 @@ namespace WebAddressdookTests
         protected ApplicationManager app;
 
         [SetUp]
-        protected void SetupTest()
+        protected void SetupApplicationManager()
         {
             app = ApplicationManager.GetInstance();
-
-          
         }     
     }
 }

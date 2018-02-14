@@ -8,7 +8,7 @@ using NUnit.Framework;
 namespace WebAddressdookTests.tests
 {
     [TestFixture]
-    public class ContactModificationTets : TestBase
+    public class ContactModificationTets : AuthTestBase
     {
         [Test]
         public void ContactModificationTest()

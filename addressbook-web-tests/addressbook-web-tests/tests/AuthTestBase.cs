@@ -7,15 +7,11 @@ using NUnit.Framework;
 
 namespace WebAddressdookTests
 {
-    [SetUpFixture]
-    public class TestSuiteFixture
+    public class AuthTestBase : TestBase
     {
-
         [SetUp]
-        public void InitApplicartionManafer()
-        {
-            ApplicationManager app = ApplicationManager.GetInstance();
-            app.Navigator.GoToHomePage();
+        protected void SetupLogin()
+        {           
             app.Auth.Login(new AccountData("admin", "secret"));
         }
     }
