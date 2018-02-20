@@ -32,6 +32,7 @@ namespace WebAddressdookTests
         {
             manager.Navigator.GoToHomePage();
 
+            PresenceElement();
             SelectContact(v);
             DeleteContact();
             ApproveDeleting();
@@ -40,14 +41,26 @@ namespace WebAddressdookTests
             return this;
         }
 
+        public ContactHelper PresenceElement()
+        {
+            ContactData acc = new ContactData("Elena", "Gosh");
+
+            if (!IsElementPresent(By.XPath("(//img[@alt='Edit'])[1]")))
+            {
+                Create(acc);
+            }
+            return this;
+        }
+
         public ContactHelper Modify(int v, ContactData data)
         {
             manager.Navigator.GoToHomePage();
+
+            PresenceElement();
             InitContactModification(v);
             FillContactForm(data);
             SubmitContactModification();
             manager.Navigator.GoToHomePage();
-
             return this;
         }
 
@@ -86,6 +99,7 @@ namespace WebAddressdookTests
 
         public ContactHelper InitContactModification(int index)
         {
+            
             driver.FindElement(By.XPath("(//img[@alt='Edit'])["+index+"]")).Click();
             return this;
         }

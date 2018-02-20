@@ -35,8 +35,6 @@ namespace WebAddressdookTests
             }
             driver.Navigate().GoToUrl(baseURL + "addressbook/");
         }
-
-       
     }
 
  }

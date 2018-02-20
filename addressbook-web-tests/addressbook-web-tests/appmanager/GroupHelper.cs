@@ -30,6 +30,8 @@ namespace WebAddressdookTests
         public GroupHelper Modify(int index, GroupData newData)
         {
             manager.Navigator.GoToGroupPage();
+
+            PresenceElement();
             SelectGroup(index);
             InitGroupMidification();
             FillGroupForm(newData);
@@ -43,9 +45,20 @@ namespace WebAddressdookTests
         {
             manager.Navigator.GoToGroupPage();
 
+            PresenceElement();
             SelectGroup(index);
             RemoveGroup();
             ReturToGroupPage();
+            return this;
+        }
+
+        public GroupHelper PresenceElement()
+        {
+            GroupData acc = new GroupData("Smith");
+            if(!IsElementPresent(By.XPath("(//input[@name='selected[]'])[1]")))
+            {
+                Create(acc);
+            }
             return this;
         }
 
