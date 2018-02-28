@@ -30,8 +30,7 @@ namespace WebAddressdookTests
         public GroupHelper Modify(int index, GroupData newData)
         {
             manager.Navigator.GoToGroupPage();
-
-            PresenceElement();
+     
             SelectGroup(index);
             InitGroupMidification();
             FillGroupForm(newData);
@@ -44,22 +43,26 @@ namespace WebAddressdookTests
         public GroupHelper Remove(int index)
         {
             manager.Navigator.GoToGroupPage();
-
-            PresenceElement();
+        
             SelectGroup(index);
             RemoveGroup();
             ReturToGroupPage();
             return this;
         }
 
-        public GroupHelper PresenceElement()
+        public bool PresenceElement()
+        {
+            return IsElementPresent(By.XPath("(//input[@name='selected[]'])[1]"));
+        }
+
+        public void CheckPresence()
         {
             GroupData acc = new GroupData("Smith");
-            if(!IsElementPresent(By.XPath("(//input[@name='selected[]'])[1]")))
+
+            if (!PresenceElement())
             {
                 Create(acc);
             }
-            return this;
         }
 
         public GroupHelper SelectGroup(int index)

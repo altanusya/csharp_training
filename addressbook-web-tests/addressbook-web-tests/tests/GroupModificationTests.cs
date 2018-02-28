@@ -13,6 +13,8 @@ namespace WebAddressdookTests
         [Test]
         public void GroupModificationTest()
         {
+            app.Groups.CheckPresence();
+
             GroupData newData = new GroupData("zzz");
             newData.Footer = "rrr";
             newData.Header = "hhh";

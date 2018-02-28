@@ -13,6 +13,7 @@ namespace WebAddressdookTests.tests
         [Test]
         public void ContactRemovalTest()
         {
+            app.Contacts.CheckPresence();
             app.Contacts.Remove(2);
         }
     }

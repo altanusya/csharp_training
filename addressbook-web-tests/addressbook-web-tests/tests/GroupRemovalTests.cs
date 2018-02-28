@@ -16,6 +16,7 @@ namespace WebAddressdookTests
         [Test]
         public void GroupRemovalTest()
         {
+            app.Groups.CheckPresence();
             app.Groups.Remove(1);
         }
     }

@@ -31,8 +31,7 @@ namespace WebAddressdookTests
         public ContactHelper Remove(int v)
         {
             manager.Navigator.GoToHomePage();
-
-            PresenceElement();
+            
             SelectContact(v);
             DeleteContact();
             ApproveDeleting();
@@ -41,22 +40,25 @@ namespace WebAddressdookTests
             return this;
         }
 
-        public ContactHelper PresenceElement()
+        public bool PresenceElement()
+        {
+            return IsElementPresent(By.XPath("(//img[@alt='Edit'])[1]")); 
+        }
+
+        public void CheckPresence()
         {
             ContactData acc = new ContactData("Elena", "Gosh");
 
-            if (!IsElementPresent(By.XPath("(//img[@alt='Edit'])[1]")))
+            if (!PresenceElement())
             {
                 Create(acc);
             }
-            return this;
         }
 
         public ContactHelper Modify(int v, ContactData data)
         {
             manager.Navigator.GoToHomePage();
 
-            PresenceElement();
             InitContactModification(v);
             FillContactForm(data);
             SubmitContactModification();

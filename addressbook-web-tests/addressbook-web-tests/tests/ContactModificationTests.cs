@@ -15,7 +15,11 @@ namespace WebAddressdookTests.tests
         {
             ContactData data = new ContactData("Anna", "Smith");
 
+            app.Contacts.CheckPresence();
             app.Contacts.Modify(1, data);
+        
         }
+
+       
     }
 }
