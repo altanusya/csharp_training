@@ -3,9 +3,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using NUnit.Framework;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.Support.UI;
+using System.Collections.Generic;
 
 namespace WebAddressdookTests
 {
@@ -18,9 +16,14 @@ namespace WebAddressdookTests
             GroupData group = new GroupData("AAA");
             group.Footer = "fff";
             group.Header = "ddd";
-                       
+
+            List<GroupData> oldGroups = app.Groups.GetGroupList();
+
             app.Groups.Create(group);
-        }
+
+            List<GroupData> newGroups = app.Groups.GetGroupList();
+            Assert.AreEqual(oldGroups.Count + 1, newGroups.Count);
+                }
 
         [Test]
         public void EmptyGroupCreationTest()
@@ -28,8 +31,28 @@ namespace WebAddressdookTests
             GroupData group = new GroupData("");
             group.Footer = "";
             group.Header = "";
-          
+
+            List<GroupData> oldGroups = app.Groups.GetGroupList();
+
             app.Groups.Create(group);
+
+            List<GroupData> newGroups = app.Groups.GetGroupList();
+            Assert.AreEqual(oldGroups.Count + 1, newGroups.Count);
+        }
+
+        [Test]
+        public void BadNameGroupCreationTest()
+        {
+            GroupData group = new GroupData("a'a");
+            group.Footer = "";
+            group.Header = "";
+
+            List<GroupData> oldGroups = app.Groups.GetGroupList();
+
+            app.Groups.Create(group);
+
+            List<GroupData> newGroups = app.Groups.GetGroupList();
+            Assert.AreEqual(oldGroups.Count + 1, newGroups.Count);
         }
     }
 }
