@@ -19,7 +19,7 @@ namespace WebAddressdookTests
             newData.Footer = "rrr";
             newData.Header = "hhh";
 
-            app.Groups.Modify(1, newData);
+            app.Groups.Modify(0, newData);
         }
 
     }
