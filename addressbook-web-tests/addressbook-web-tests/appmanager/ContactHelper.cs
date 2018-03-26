@@ -39,28 +39,33 @@ namespace WebAddressdookTests
 
             return this;
         }
+        private List<ContactData> contactCache = null;
 
         public List<ContactData> GetContactList()
         {
-            List<ContactData> contacts = new List<ContactData>();
-            manager.Navigator.GoToHomePage();
-            ICollection<IWebElement> elements = driver.FindElements(By.XPath("//table[@id='maintable']/tbody/tr[position()>1]"));
-            foreach (IWebElement element in elements)
+            if (contactCache == null)
             {
-                string fullName = element.Text;
-                if (fullName != "")
+                contactCache = new List<ContactData>();
+                manager.Navigator.GoToHomePage();
+                ICollection<IWebElement> elements = driver.FindElements(By.XPath("//table[@id='maintable']/tbody/tr[position()>1]"));
+                foreach (IWebElement element in elements)
                 {
-                    string[] names = fullName.Split(' ');
-                    string lastName = names[0];
-                    string firstName = names[1];
-                    contacts.Add(new ContactData(firstName, lastName));
-                }
-                else
-                {
-                    contacts.Add(new ContactData("", ""));
+                    string fullName = element.Text;
+                    if (fullName != "")
+                    {
+                        string[] names = fullName.Split(' ');
+                        string lastName = names[0];
+                        string firstName = names[1];
+                        contactCache.Add(new ContactData(firstName, lastName));
+                    }
+                    else
+                    {
+                        contactCache.Add(new ContactData("", ""));
+                    }
                 }
             }
-            return contacts;
+          
+            return new List<ContactData>(contactCache);
         }
 
         public bool PresenceElement()
@@ -98,6 +103,7 @@ namespace WebAddressdookTests
         public ContactHelper DeleteContact()
         {
             driver.FindElement(By.XPath("html/body/div[1]/div[4]/form[2]/div[2]/input")).Click();
+            contactCache = null;
             return this;
         }
 
@@ -112,6 +118,7 @@ namespace WebAddressdookTests
         public ContactHelper SubmitContactCreation()
         {
             driver.FindElement(By.Name("submit")).Click();
+            contactCache = null;
             return this;
         }
         
@@ -119,6 +126,7 @@ namespace WebAddressdookTests
         public ContactHelper SubmitContactModification()
         {
             driver.FindElement(By.Name("update")).Click();
+            contactCache = null;
             return this;
         }
 
