@@ -27,6 +27,11 @@ namespace WebAddressdookTests
             return this;
         }
 
+        public int GetGroupCount()
+        {
+            return driver.FindElements(By.CssSelector("span.group")).Count;
+        }
+
         private List<GroupData> groupCache = null;
 
         public List<GroupData> GetGroupList()

@@ -28,6 +28,11 @@ namespace WebAddressdookTests
             return this;
         }
 
+        public int GetContactCount()
+        {
+            return driver.FindElements(By.XPath("//table[@id='maintable']/tbody/tr[position()>1]")).Count;
+        }
+
         public ContactHelper Remove(int v)
         {
             manager.Navigator.GoToHomePage();

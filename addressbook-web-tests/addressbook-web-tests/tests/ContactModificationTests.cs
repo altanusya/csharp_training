@@ -19,6 +19,8 @@ namespace WebAddressdookTests.tests
             app.Contacts.CheckPresence();
             app.Contacts.Modify(1, data);
 
+            Assert.AreEqual(oldContacts.Count, app.Contacts.GetContactCount());
+
             List<ContactData> newContacts = app.Contacts.GetContactList();
             oldContacts[0].Name = data.Name;
             oldContacts[0].LastName = data.LastName;

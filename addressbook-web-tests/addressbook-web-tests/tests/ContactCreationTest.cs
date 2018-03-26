@@ -23,6 +23,8 @@ namespace WebAddressdookTests
 
             app.Contacts.Create(data);
 
+            Assert.AreEqual(oldContacts.Count + 1, app.Contacts.GetContactCount());
+
             List<ContactData> newContacts = app.Contacts.GetContactList();
             oldContacts.Add(data);
 
@@ -38,6 +40,8 @@ namespace WebAddressdookTests
 
             List<ContactData> oldContacts = app.Contacts.GetContactList();
             app.Contacts.Create(data);
+
+            Assert.AreEqual(oldContacts.Count + 1, app.Contacts.GetContactCount());
 
             List<ContactData> newContacts = app.Contacts.GetContactList();
             oldContacts.Add(data);
