@@ -40,6 +40,29 @@ namespace WebAddressdookTests
             return this;
         }
 
+        public List<ContactData> GetContactList()
+        {
+            List<ContactData> contacts = new List<ContactData>();
+            manager.Navigator.GoToHomePage();
+            ICollection<IWebElement> elements = driver.FindElements(By.XPath("//table[@id='maintable']/tbody/tr[position()>1]"));
+            foreach (IWebElement element in elements)
+            {
+                string fullName = element.Text;
+                if (fullName != "")
+                {
+                    string[] names = fullName.Split(' ');
+                    string lastName = names[0];
+                    string firstName = names[1];
+                    contacts.Add(new ContactData(firstName, lastName));
+                }
+                else
+                {
+                    contacts.Add(new ContactData("", ""));
+                }
+            }
+            return contacts;
+        }
+
         public bool PresenceElement()
         {
             return IsElementPresent(By.XPath("(//img[@alt='Edit'])[1]")); 
@@ -109,7 +132,7 @@ namespace WebAddressdookTests
         public ContactHelper FillContactForm(ContactData contact)
         {
             Type(By.Name("firstname"), contact.Name);
-            Type(By.Name("middlename"), contact.Middlename);
+            Type(By.Name("lastname"), contact.LastName);
             return this;
         }
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WebAddressdookTests
 {
-    public class ContactData
+    public class ContactData : IEquatable<ContactData>, IComparable<ContactData>
     {
         private string firstName;
         private string middleName;
@@ -30,7 +30,39 @@ namespace WebAddressdookTests
         public ContactData(string name, string surname)
         {
             this.firstName = name;
-            this.middleName = surname;
+            this.lastName = surname;
+        }
+
+        public bool Equals(ContactData other)
+        {
+            if (Object.ReferenceEquals(other, null))
+            {
+                return false;
+            }
+            if (Object.ReferenceEquals(this, other))
+            {
+                return true;
+            }
+            return Name == other.Name && LastName == other.LastName;
+        }
+
+        public override int GetHashCode()
+        {
+            return Name.GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            return Name + " " + LastName;
+        }
+
+        public int CompareTo(ContactData other)
+        {
+            if (Object.ReferenceEquals(other, null))
+            {
+                return 1;
+            }
+            return (Name + " " + LastName).CompareTo(other.Name + " " + other.LastName);
         }
 
         public string Name {
@@ -44,15 +76,15 @@ namespace WebAddressdookTests
             }
         }
 
-        public string Middlename
+        public string LastName
         {
             get
             {
-                return middleName;
+                return lastName;
             }
             set
             {
-                middleName = value;
+                lastName = value;
             }
 
         }

@@ -14,10 +14,19 @@ namespace WebAddressdookTests.tests
         public void ContactModificationTest()
         {
             ContactData data = new ContactData("Anna", "Smith");
+            List<ContactData> oldContacts = app.Contacts.GetContactList();
 
             app.Contacts.CheckPresence();
             app.Contacts.Modify(1, data);
-        
+
+            List<ContactData> newContacts = app.Contacts.GetContactList();
+            oldContacts[0].Name = data.Name;
+            oldContacts[0].LastName = data.LastName;
+
+            oldContacts.Sort();
+            newContacts.Sort();
+
+            Assert.AreEqual(oldContacts, newContacts);
         }
 
        

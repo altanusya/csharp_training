@@ -13,8 +13,15 @@ namespace WebAddressdookTests.tests
         [Test]
         public void ContactRemovalTest()
         {
-            app.Contacts.CheckPresence();
+            List<ContactData> oldContacts = app.Contacts.GetContactList();
+
+            app.Contacts.CheckPresence();           
             app.Contacts.Remove(2);
+
+            List<ContactData> newContacts = app.Contacts.GetContactList();
+            oldContacts.RemoveAt(1);
+
+            Assert.AreEqual(oldContacts, newContacts);
         }
     }
 }
